@@ -1,169 +1,1059 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mother Sai Construction – Balanced Green Themes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Sai Construction Technologies</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: #e5e7eb;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #475569;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #0ea5e9;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: rgba(255, 255, 255, 0.98);
+    min-width: 220px;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    display: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border: 1px solid #e2e8f0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: #475569;
+}
+
+.dropdown-menu a:hover {
+    background: #f0f9ff;
+    color: #0ea5e9;
+}
+
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.mobile-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #1e293b;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #0f172a;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #475569;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(14, 165, 233, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #0ea5e9;
+    color: #0ea5e9;
+}
+
+.btn-secondary:hover {
+    background: #f0f9ff;
+}
+
+.hero-image {
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #0f172a;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: #475569;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    border: 1px solid #e2e8f0;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(14, 165, 233, 0.15);
+    border-color: #0ea5e9;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #0ea5e9;
+}
+
+.card p {
+    color: #475569;
+    line-height: 1.8;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.about-image {
+    height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    border: 1px solid #e2e8f0;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(14, 165, 233, 0.15);
+}
+
+.project-image {
+    height: 250px;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-info h3 {
+    color: #0ea5e9;
+    margin-bottom: 0.5rem;
+}
+
+.location {
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #475569;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-right: 1rem;
+    color: white;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #1e293b;
+    border-radius: 8px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 120px;
+}
+
+.contact-item {
+    margin-bottom: 1.5rem;
+}
+
+/* ENHANCED RESPONSIVE STYLES */
+
+@media (max-width: 968px) {
+    /* Navigation - Mobile Menu */
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.98);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
-    section {
-      padding: 100px 10%;
+    .nav-links.active {
+        left: 0;
     }
 
-    .label {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      opacity: 0.7;
+    .nav-links li {
+        width: 100%;
+        padding: 1rem 0;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
+    .dropdown-menu {
+        position: static;
+        display: none;
+        margin-top: 0.5rem;
+        background: #f0f9ff;
+        box-shadow: none;
+        border: none;
     }
 
-    p {
-      max-width: 640px;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 32px;
+    .dropdown.active .dropdown-menu {
+        display: block;
     }
 
-    button {
-      padding: 14px 30px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
+    .mobile-toggle {
+        display: flex;
     }
 
-    /* ================= DARK ================= */
-
-    /* Dark — Futuristic Green Tech */
-    .dark-green {
-      background: linear-gradient(135deg, #052e2b, #021c1a);
-      color: #ECFEFF;
-    }
-    .dark-green p { color: #A7F3D0; }
-    .dark-green button {
-      background: #22C55E;
-      color: #022c22;
+    /* Hero Section */
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
 
-    /* ================= MEDIUM ================= */
-
-    /* Medium 1 — Sustainable Construction (Green Primary) */
-    .medium-green {
-      background: #EAF7F0;
-      color: #064E3B;
-    }
-    .medium-green p { color: #065F46; }
-    .medium-green button {
-      background: #16A34A;
-      color: #ffffff;
+    .hero-text h1 {
+        font-size: 2.5rem;
     }
 
-    /* Medium 2 — Modern Infrastructure Blue */
-    .medium-blue {
-      background: #E8F0FE;
-      color: #0F172A;
-    }
-    .medium-blue p { color: #334155; }
-    .medium-blue button {
-      background: #2563EB;
-      color: #ffffff;
+    .hero-text p {
+        font-size: 1.1rem;
     }
 
-    /* ================= LIGHT ================= */
-
-    /* Light 1 — Clean Global Corporate */
-    .light-corporate {
-      background: #FFFFFF;
-      color: #0F172A;
-    }
-    .light-corporate p { color: #475569; }
-    .light-corporate button {
-      background: #0EA5E9;
-      color: #ffffff;
+    .hero-image {
+        height: 350px;
     }
 
-    /* Light 2 — Eco Infrastructure (Green + Earth) */
-    .light-eco {
-      background: #F6FBF7;
-      color: #1F2937;
+    /* Grid Layouts */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
-    .light-eco p { color: #4B5563; }
-    .light-eco button {
-      background: #22C55E;
-      color: #064E3B;
+
+    .about-image {
+        height: 350px;
     }
-  </style>
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Page Headers */
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .page-header p {
+        font-size: 1.1rem;
+    }
+
+    /* Buttons */
+    .btn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Smaller screens */
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .hero-image, .about-image {
+        height: 300px;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .card, .testimonial-card, .contact-form {
+        padding: 1.5rem;
+    }
+
+    .nav-container {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Very small screens */
+    .hero-text h1 {
+        font-size: 1.75rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .page {
+        padding: 5rem 1rem 2rem;
+    }
+
+    .hero, .page-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+    </style>
 </head>
-
 <body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Mother Sai Construction</div>
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li class="dropdown">
+                    <a href="#">Services ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#" onclick="showPage('services')">Plumbing Solutions</a>
+                        <a href="#" onclick="showPage('services')">FM2 & Engineered Flooring and Screening</a>
+                        <a href="#" onclick="showPage('services')">Project Management</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Products ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#" onclick="showPage('graphene-concrete')">Graphene Concrete</a>
+                        <a href="#" onclick="showPage('graphene-concrete')">RMC</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Projects ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#" onclick="showPage('projects')">Commercial Projects</a>
+                        <a href="#" onclick="showPage('projects')">Residential Projects</a>
+                        <a href="#" onclick="showPage('projects')">Infrastructure Projects</a>
+                    </div>
+                </li>
+                <li><a href="#" onclick="showPage('testimonials')">Testimonials</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <!-- DARK -->
-  <section class="dark-green">
-    <div class="label">Dark Theme · Futuristic Green Tech</div>
-    <h1>Building the Future with Intelligent & Sustainable Construction</h1>
-    <p>
-      Mother Sai Construction Technologies Pvt. Ltd. integrates smart
-      engineering, automation, and sustainable technologies to deliver
-      next-generation global infrastructure.
-    </p>
-    <button>Explore Our Technologies</button>
-  </section>
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Building Tomorrow's Infrastructure Today</h1>
+                    <p>Mother Sai Construction Technologies leads the global evolution in sustainable construction with cutting-edge solutions.</p>
+                    <button class="btn btn-primary" onclick="showPage('projects')">Explore Projects</button>
+                    <button class="btn btn-secondary" onclick="showPage('contact')">Contact Us</button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800" alt="Construction">
+                </div>
+            </div>
+        </section>
 
-  <!-- MEDIUM 1 -->
-  <section class="medium-green">
-    <div class="label">Medium Theme · Sustainable Construction</div>
-    <h1>Engineering Sustainable Infrastructure for Tomorrow</h1>
-    <p>
-      We pioneer eco-conscious construction solutions that balance performance,
-      durability, and environmental responsibility.
-    </p>
-    <button>Our Sustainability Vision</button>
-  </section>
+        <section class="page-container" style="padding: 4rem 2rem;">
+            <div class="page-header">
+                <h1>Why Choose Mother Sai</h1>
+                <p>Decade of experience in leading the construction industry with innovation and excellence</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🏗️ Global Expertise</h3>
+                    <p>With projects across India and Middle East we bring international standards to every construction site.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Advanced Technology</h3>
+                    <p>Pioneering graphene-enhanced concrete and smart building solutions for superior performance.</p>
+                </div>
+                <div class="card">
+                    <h3>🌱 Sustainability Focus</h3>
+                    <p>LEED-certified projects and eco-friendly practices that protect our planet for future generations.</p>
+                </div>
+                <div class="card">
+                    <h3>⏱️ On-Time Delivery</h3>
+                    <p>97% of our projects completed ahead of schedule with uncompromising quality standards.</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Cost Efficiency</h3>
+                    <p>Innovative construction methods that reduce costs by up to 25% without sacrificing quality.</p>
+                </div>
+                <div class="card">
+                    <h3>🛡️ Safety First</h3>
+                    <p>Zero-accident record with rigorous safety protocols and continuous training programs.</p>
+                </div>
+            </div>
+        </section>
 
-  <!-- MEDIUM 2 -->
-  <section class="medium-blue">
-    <div class="label">Medium Theme · Modern Infrastructure</div>
-    <h1>Reliable Infrastructure Built to Global Standards</h1>
-    <p>
-      Delivering technology-driven construction solutions with precision,
-      safety, and scalability across India and international markets.
-    </p>
-    <button>About Our Company</button>
-  </section>
+        <section class="page-container" style="padding: 4rem 2rem;">
+            <div class="page-header">
+                <h1>Featured Projects</h1>
+                <p>Recent achievements in construction excellence</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Larsen and Toubro</h3>
+                        <p class="location">Hyderabad, India</p>
+                        <p>50-story mixed-use development with smart building technology.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Suzlon</h3>
+                        <p class="location">Bangalore, India</p>
+                        <p>Powering wind energy infrastructure with total concrete solutions</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>SRMT</h3>
+                        <p class="location">Mumbai, India</p>
+                        <p>End to End Plumbing Solutions</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-primary" onclick="showPage('projects')">View All Projects</button>
+            </div>
+        </section>
 
-  <!-- LIGHT 1 -->
-  <section class="light-corporate">
-    <div class="label">Light Theme · Clean Global Corporate</div>
-    <h1>Trusted Construction Technology Partner</h1>
-    <p>
-      A future-ready construction company offering transparent, efficient, and
-      innovative infrastructure solutions worldwide.
-    </p>
-    <button>Learn More</button>
-  </section>
+        <section class="page-container" style="padding: 4rem 2rem;">
+            <div style="background: rgba(30, 41, 59, 0.6); border-radius: 16px; padding: 4rem; text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #60a5fa;">By the Numbers</h2>
+                <p style="color: #cbd5e1; margin-bottom: 3rem; font-size: 1.1rem;">Our track record speaks for itself</p>
+                <div class="cards-grid">
+                    <div>
+                        <h3 style="font-size: 3rem; color: #60a5fa; margin-bottom: 0.5rem;">150+</h3>
+                        <p style="color: #cbd5e1;">Projects Completed</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 3rem; color: #60a5fa; margin-bottom: 0.5rem;">10+</h3>
+                        <p style="color: #cbd5e1;">Years Experience</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 3rem; color: #60a5fa; margin-bottom: 0.5rem;">50+</h3>
+                        <p style="color: #cbd5e1;">Expert Team Members</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- LIGHT 2 -->
-  <section class="light-eco">
-    <div class="label">Light Theme · Eco Infrastructure</div>
-    <h1>Building Greener Foundations for Modern Cities</h1>
-    <p>
-      Combining modern construction practices with green technologies to
-      support smart cities and sustainable development.
-    </p>
-    <button>Explore Green Solutions</button>
-  </section>
+        <section class="page-container" style="padding: 4rem 2rem;">
+            <div class="page-header">
+                <h1>What Our Clients Say</h1>
+                <p>Trusted by leading organizations worldwide</p>
+            </div>
+            <div class="cards-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Mother Sai Construction delivered our office complex ahead of schedule and with exceptional quality. Their use of graphene concrete has significantly reduced our maintenance costs."</p>
+                    <div>
+                        <span class="author-avatar">RK</span>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <h4>Rajesh Kumar</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">CEO, TechCorp India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The smart building solutions implemented by Mother Sai have transformed how we manage our facilities. Energy costs are down 40% and tenant satisfaction is at an all-time high."</p>
+                    <div>
+                        <span class="author-avatar">SM</span>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <h4>Sarah Mitchell</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">Property Manager, Dubai Real Estate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Outstanding professionalism and innovation. The team's expertise in sustainable construction helped us achieve LEED Platinum certification on our first attempt."</p>
+                    <div>
+                        <span class="author-avatar">AP</span>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <h4>Amit Patel</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">Director, Green Spaces Pvt Ltd</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="page-container" style="padding: 4rem 2rem;">
+            <div class="cta-section" style="border-radius: 16px; padding: 4rem; text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Start Your Project?</h2>
+                <p style="margin-bottom: 2rem; font-size: 1.2rem;">Let's discuss how we can bring your vision to life</p>
+                <button class="btn" style="background: white; color: #1e40af;" onclick="showPage('contact')">Get in Touch</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="about" class="page">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>About Us</h1>
+                <p>Pioneering the future of construction with innovation and excellence</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Company">
+                </div>
+                <div>
+                    <h2 style="color: #60a5fa; margin-bottom: 1rem;">Our Story</h2>
+                    <p style="color: #cbd5e1; margin-bottom: 1rem;">Mother Sai group began its journey is 2016 with a single Ready Mix Concrete Plant in Tamil Nadu. Known for our unwavering commitment to quality and consistency, we quickly earned trust of our customers. Over time, we have grown beyond concrete to offer plumbing and fire fighting solutions, making us a comprehensive solution provider for construction and infrastructure projects. Over the decade, Mother Sai Construction Technologies has grown into a global leader in innovative building solutions.</p>
+                    <p style="color: #cbd5e1;">Our team of world-class engineers and construction specialists work to push the boundaries of modern construction.</p>
+                </div>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Our Mission</h3>
+                    <p>To deliver exceptional construction solutions that combine innovation, sustainability, and quality.</p>
+                </div>
+                <div class="card">
+                    <h3>Our Vision</h3>
+                    <p>To be the world's most trusted construction technology company.</p>
+                </div>
+                <div class="card">
+                    <h3>Our Values</h3>
+                    <p>Integrity, innovation, sustainability, safety, and customer-centricity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="services" class="page">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>Our Services</h1>
+                <p>Comprehensive construction solutions tailored to your needs</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Infrastructure Development</h3>
+                    <p>Large-scale infrastructure projects including highways, bridges, and urban development with sustainable practices.</p>
+                </div>
+                <div class="card">
+                    <h3>Smart Building Solutions</h3>
+                    <p>Integration of IoT, automation, and energy-efficient systems into modern buildings.</p>
+                </div>
+                <div class="card">
+                    <h3>Project Management</h3>
+                    <p>End-to-end project management ensuring timely delivery and quality excellence.</p>
+                </div>
+                <div class="card">
+                    <h3>Sustainable Construction</h3>
+                    <p>Green building practices and LEED-certified construction solutions.</p>
+                </div>
+                <div class="card">
+                    <h3>Renovation & Restoration</h3>
+                    <p>Expert renovation services that enhance functionality and preserve heritage.</p>
+                </div>
+                <div class="card">
+                    <h3>Consulting Services</h3>
+                    <p>Strategic construction consulting and technical advisory services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="graphene-concrete" class="page">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>Graphene-Enhanced Concrete</h1>
+                <p>Revolutionary material technology for the future</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800" alt="Graphene">
+                </div>
+                <div>
+                    <h2 style="color: #60a5fa; margin-bottom: 1rem;">Next-Generation Building Material</h2>
+                    <p style="color: #cbd5e1; margin-bottom: 1rem;">Our graphene-enhanced concrete represents a breakthrough in construction materials.</p>
+                    <div style="margin-top: 2rem;">
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">Key Benefits</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 0.5rem;">✓ 30% Stronger - Enhanced structural performance</p>
+                        <p style="color: #cbd5e1; margin-bottom: 0.5rem;">✓ Longer Lifespan - Improved durability</p>
+                        <p style="color: #cbd5e1; margin-bottom: 0.5rem;">✓ Reduced Carbon Footprint - Eco-friendly</p>
+                        <p style="color: #cbd5e1; margin-bottom: 0.5rem;">✓ Faster Curing - Accelerated timelines</p>
+                        <p style="color: #cbd5e1;">✓ Waterproof Properties - Superior resistance</p>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 2rem;" onclick="showPage('contact')">Request Information</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="projects" class="page">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>Our Projects</h1>
+                <p>Showcasing excellence across the globe</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Tech Hub Plaza</h3>
+                        <p class="location">Hyderabad, India</p>
+                        <p>50-story mixed-use development with smart building technology.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Green Valley Residences</h3>
+                        <p class="location">Bangalore, India</p>
+                        <p>LEED Platinum certified residential community with 500+ homes.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Metro Link Bridge</h3>
+                        <p class="location">Mumbai, India</p>
+                        <p>2.5km cable-stayed bridge using graphene-enhanced concrete.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1460472178825-e5240623afd5?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Innovation Campus</h3>
+                        <p class="location">Singapore</p>
+                        <p>Research facility with advanced automation and energy-neutral operations.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1590856029620-95c544bfc36e?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Skyline Towers</h3>
+                        <p class="location">Dubai, UAE</p>
+                        <p>Twin 80-story luxury residential towers with world-class amenities.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800" alt="Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Coastal Highway</h3>
+                        <p class="location">Chennai, India</p>
+                        <p>45km coastal expressway with innovative drainage systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="testimonials" class="page">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>Testimonials</h1>
+                <p>What our clients say about us</p>
+            </div>
+            <div class="cards-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Mother Sai Construction delivered our office complex ahead of schedule and with exceptional quality. Their use of graphene concrete has significantly reduced our maintenance costs."</p>
+                    <div>
+                        <span class="author-avatar">RK</span>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <h4>Rajesh Kumar</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">CEO, TechCorp India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The smart building solutions implemented by Mother Sai have transformed how we manage our facilities. Energy costs are down 40% and tenant satisfaction is at an all-time high."</p>
+                    <div>
+                        <span class="author-avatar">SM</span>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <h4>Sarah Mitchell</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">Property Manager, Dubai Real Estate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Outstanding professionalism and innovation. The team's expertise in sustainable construction helped us achieve LEED Platinum certification on our first attempt."</p>
+                    <div>
+                        <span class="author-avatar">AP</span>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <h4>Amit Patel</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">Director, Green Spaces Pvt Ltd</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="page">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>Contact Us</h1>
+                <p>Get in touch with our team</p>
+            </div>
+            <div class="contact-container">
+                <div>
+                    <h2 style="color: #60a5fa; margin-bottom: 1.5rem;">Let's Build Together</h2>
+                    <p style="color: #cbd5e1; margin-bottom: 2rem;">Whether you're planning a new project or need expert consultation, we're here to help.</p>
+                    <div class="contact-item">
+                        <h4 style="color: #60a5fa;">Address</h4>
+                        <p style="color: #cbd5e1;">Plot No. 42, Hi-Tech City<br>Hyderabad, Telangana 500081<br>India</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4 style="color: #60a5fa;">Email</h4>
+                        <p style="color: #cbd5e1;">info@mothersaiconst.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4 style="color: #60a5fa;">Phone</h4>
+                        <p style="color: #cbd5e1;">+91 40 1234 5678</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function showPage(pageId) {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0, 0);
+        
+        // Close mobile menu when navigating
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.remove('active');
+    }
+
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        alert('Thank you for your message! We will get back to you soon.');
+        e.target.reset();
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const nav = document.querySelector('nav');
+        const navLinks = document.getElementById('navLinks');
+        const toggle = document.querySelector('.mobile-toggle');
+        
+        if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+
+    // Handle dropdown clicks on mobile
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdowns = document.querySelectorAll('.dropdown > a');
+        
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                if (window.innerWidth <= 968) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    parent.classList.toggle('active');
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
