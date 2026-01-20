@@ -1040,7 +1040,7 @@ nav {
         }
     });
 
-    // Handle dropdown clicks on mobile
+    // Handle dropdown clicks on mobile - with toggle functionality
     document.addEventListener('DOMContentLoaded', function() {
         const dropdowns = document.querySelectorAll('.dropdown > a');
         
@@ -1049,6 +1049,15 @@ nav {
                 if (window.innerWidth <= 968) {
                     e.preventDefault();
                     const parent = this.parentElement;
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown').forEach(other => {
+                        if (other !== parent) {
+                            other.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current dropdown (collapse if already open)
                     parent.classList.toggle('active');
                 }
             });
