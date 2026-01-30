@@ -995,6 +995,20 @@ footer {
 }
 
 /* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 4em;
+    }
+
+    .section-title {
+        font-size: 3em;
+    }
+}
+
 @media (max-width: 1024px) {
     .container {
         padding: 0 30px;
@@ -1004,6 +1018,7 @@ footer {
         grid-template-columns: 1fr;
         gap: 40px;
         padding: 60px 30px;
+        min-height: auto;
     }
 
     .hero-content h1 {
@@ -1012,6 +1027,7 @@ footer {
 
     .hero-image {
         height: 400px;
+        width: 100%;
     }
 
     .services-grid {
@@ -1041,86 +1057,204 @@ footer {
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    /* Fix all 2-column grids */
+    div[style*="grid-template-columns: 1fr 1fr"],
+    div[style*="grid-template-columns: 1.2fr 1fr"],
+    div[style*="grid-template-columns: 1fr 1.3fr"],
+    div[style*="grid-template-columns: 1fr 1.5fr"],
+    div[style*="grid-template-columns: 1.5fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Fix all repeat grids */
+    div[style*="grid-template-columns: repeat(2, 1fr)"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    div[style*="grid-template-columns: repeat(4, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    div[style*="grid-template-columns: repeat(5, 1fr)"] {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
 }
 
 @media (max-width: 768px) {
+    /* Hide desktop nav, show mobile menu */
     .nav-links {
         display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--secondary);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex !important;
+    }
+
+    .nav-links a {
+        padding: 15px 40px !important;
     }
 
     .mobile-menu-btn {
         display: block;
     }
 
-    .hero-content h1 {
-        font-size: 2.5em;
+    /* Typography */
+    .hero-content h1,
+    h1[style*="font-size: 5em"],
+    h1[style*="font-size: 4.5em"] {
+        font-size: 2.5em !important;
     }
 
-    .section-title {
-        font-size: 2.5em;
+    .section-title,
+    h2[style*="font-size: 4em"],
+    h2[style*="font-size: 3.5em"],
+    h2[style*="font-size: 3em"] {
+        font-size: 2em !important;
     }
 
+    h3[style*="font-size: 2.5em"] {
+        font-size: 1.8em !important;
+    }
+
+    .hero .tagline,
+    p[style*="font-size: 1.3em"],
+    p[style*="font-size: 1.2em"] {
+        font-size: 1.1em !important;
+    }
+
+    /* All grids to single column */
     .services-grid,
     .features-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .projects-grid,
+    .team-grid,
+    .stats-grid,
+    .clients-grid,
+    div[style*="grid-template-columns: 1fr 1fr"],
+    div[style*="grid-template-columns: 1.2fr 1fr"],
+    div[style*="grid-template-columns: 1fr 1.3fr"],
+    div[style*="grid-template-columns: 1fr 1.5fr"],
+    div[style*="grid-template-columns: 1.5fr 1fr"],
+    div[style*="grid-template-columns: repeat(2, 1fr)"],
+    div[style*="grid-template-columns: repeat(3, 1fr)"],
+    div[style*="grid-template-columns: repeat(4, 1fr)"],
+    div[style*="grid-template-columns: repeat(5, 1fr)"] {
+        grid-template-columns: 1fr !important;
     }
 
-    .stats-grid {
-        grid-template-columns: 1fr;
+    /* Images full width */
+    .hero-image,
+    div[style*="height: 600px"],
+    div[style*="height: 400px"],
+    div[style*="height: 350px"],
+    div[style*="height: 250px"],
+    div[style*="height: 200px"] {
+        height: 300px !important;
     }
 
-    .clients-grid {
-        grid-template-columns: repeat(2, 1fr);
+    /* Padding adjustments */
+    .container {
+        padding: 0 20px !important;
     }
 
+    .nav-container {
+        padding: 0 20px !important;
+    }
+
+    .section-padding {
+        padding: 60px 0 !important;
+    }
+
+    div[style*="padding: 60px"],
+    div[style*="padding: 50px"],
+    div[style*="padding: 40px 40px"],
+    div[style*="padding: 50px 40px"] {
+        padding: 30px 20px !important;
+    }
+
+    /* Hero CTAs */
     .hero-cta {
         flex-direction: column;
+        width: 100%;
     }
 
     .btn-primary,
     .btn-secondary,
     .btn-outline {
         text-align: center;
+        width: 100%;
     }
 
+    /* Timeline adjustments */
     .timeline::before {
         left: 20px;
     }
 
     .timeline-content {
-        width: calc(100% - 60px);
+        width: calc(100% - 60px) !important;
         margin-left: 60px !important;
         text-align: left !important;
     }
 
     .timeline-dot {
-        left: 20px;
+        left: 20px !important;
     }
 
+    /* Form adjustments */
     .form-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
+    /* Footer */
     .footer-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Gap adjustments */
+    div[style*="gap: 80px"] {
+        gap: 40px !important;
+    }
+
+    div[style*="gap: 60px"] {
+        gap: 30px !important;
     }
 }
 
 @media (max-width: 480px) {
     .hero-content h1 {
-        font-size: 2em;
+        font-size: 2em !important;
     }
 
     .section-title {
-        font-size: 2em;
+        font-size: 1.8em !important;
     }
 
     .container {
-        padding: 0 20px;
+        padding: 0 15px !important;
     }
 
     .nav-container {
-        padding: 0 20px;
+        padding: 0 15px !important;
+    }
+
+    .logo-text {
+        font-size: 1.4em !important;
+    }
+
+    div[style*="padding: 30px 20px"] {
+        padding: 20px 15px !important;
     }
 }
