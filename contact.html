@@ -282,6 +282,7 @@
             e.preventDefault();
             
             const form = document.getElementById('contactForm');
+            const formMessage = document.getElementById('successMessage');
             const submitButton = form.querySelector('button[type="submit"]');
             const originalButtonText = submitButton.innerHTML;
             
@@ -290,67 +291,48 @@
             submitButton.disabled = true;
             
             // Capture form data FIRST using FormData (confirmed working)
-            const formData = new FormData(form);
+            const formData = {
+                firstname: document.getElementById('firstName').value,
+                lastname: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                company: document.getElementById('company').value,
+                service: document.getElementById('serviceInterest').value,
+                project: document.getElementById('projectType').value,
+                location: document.getElementById('location').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
 
-            // Build URLSearchParams directly from FormData
-            const params = new URLSearchParams();
-            formData.forEach(function(value, key) {
-                params.append(key, value);
-            });
-            
-            // Log what we are actually sending
-            console.log('Form Data:', Object.fromEntries(formData));
-            console.log('Full params string:', params.toString());
-            
-            // Send as POST with URLSearchParams body
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: params.toString()
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(result) {
-                console.log('Response:', result);
+                        try {
+                // Replace this URL with your Google Apps Script Web App URL
+                // The script will save data to Google Sheets AND send email notification
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7_l8BmQuou0rAkjY0gGJXbXdGz2i20dKxpHoReT4cP9xeKsujq1dcQwmgN_bEqVGwig/exec';
                 
-                // Show success message
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Reset form
-                form.reset();
-                
-                // Scroll to success message
-                document.getElementById('successMessage').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'nearest' 
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
                 });
+
+                formMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you soon.';
+                formMessage.className = 'form-message success';
+                contactForm.reset();
                 
-                // Reset button
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
+            } catch (error) {
+                formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact us directly.';
+                formMessage.className = 'form-message error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Inquiry';
                 
-                // Hide success message after 7 seconds
-                setTimeout(function() {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 7000);
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-                
-                // Show success anyway — CORS blocks response but data still goes through
-                document.getElementById('successMessage').style.display = 'block';
-                form.reset();
-                
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
-                
-                setTimeout(function() {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 7000);
-            });
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }
         });
     </script>
 
