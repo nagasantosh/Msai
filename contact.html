@@ -275,65 +275,60 @@
     
     <!-- Contact Form Script with Google Sheets Integration -->
     <script>
-        // IMPORTANT: Replace this with your actual Google Apps Script Web App URL
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7_l8BmQuou0rAkjY0gGJXbXdGz2i20dKxpHoReT4cP9xeKsujq1dcQwmgN_bEqVGwig/exec';
         
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = document.getElementById('contactForm');
-            const formMessage = document.getElementById('successMessage');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-            
-            // Show loading state
-            submitButton.innerHTML = 'Sending...';
-            submitButton.disabled = true;
-            
-            // Capture form data FIRST using FormData (confirmed working)
-            const formData = {
-                firstname: document.getElementById('firstName').value,
-                lastname: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                company: document.getElementById('company').value,
-                service: document.getElementById('serviceInterest').value,
-                project: document.getElementById('projectType').value,
-                location: document.getElementById('location').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toISOString()
-            };
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('successMessage');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    
+    submitButton.innerHTML = 'Sending...';
+    submitButton.disabled = true;
+    
+    const formData = {
+        firstname: document.getElementById('firstName').value,
+        lastname: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        company: document.getElementById('company').value,
+        service: document.getElementById('serviceInterest').value,
+        project: document.getElementById('projectType').value,
+        location: document.getElementById('location').value,
+        message: document.getElementById('message').value,
+        timestamp: new Date().toISOString()
+    };
 
-                        try {
-                // Replace this URL with your Google Apps Script Web App URL
-                // The script will save data to Google Sheets AND send email notification
-                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7_l8BmQuou0rAkjY0gGJXbXdGz2i20dKxpHoReT4cP9xeKsujq1dcQwmgN_bEqVGwig/exec';
-                
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                formMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you soon.';
-                formMessage.className = 'form-message success';
-                contactForm.reset();
-                
-            } catch (error) {
-                formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact us directly.';
-                formMessage.className = 'form-message error';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Inquiry';
-                
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 5000);
-            }
+    try {
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7_l8BmQuou0rAkjY0gGJXbXdGz2i20dKxpHoReT4cP9xeKsujq1dcQwmgN_bEqVGwig/exec';
+        
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
         });
+
+        formMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you soon.';
+        formMessage.className = 'form-message success';
+        form.reset();
+        
+    } catch (error) {
+        formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact us directly.';
+        formMessage.className = 'form-message error';
+    } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    }
+});
+
     </script>
 
 </body>
