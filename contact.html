@@ -314,8 +314,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
             body: JSON.stringify(formData)
         });
 
-        formMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you soon.';
-        formMessage.className = 'form-message success';
+        document.getElementById('successMessage').style.display = 'block';
         form.reset();
         
     } catch (error) {
