@@ -289,22 +289,17 @@
             submitButton.innerHTML = 'Sending...';
             submitButton.disabled = true;
             
-            // Manually build the params from each input field
+            // Capture form data FIRST using FormData (confirmed working)
+            const formData = new FormData(form);
+
+            // Build URLSearchParams directly from FormData
             const params = new URLSearchParams();
-            params.append('firstName', document.getElementById('firstName').value);
-            params.append('lastName', document.getElementById('lastName').value);
-            params.append('email', document.getElementById('email').value);
-            params.append('phone', document.getElementById('phone').value);
-            params.append('company', document.getElementById('company').value);
-            params.append('serviceInterest', document.getElementById('serviceInterest').value);
-            params.append('projectType', document.getElementById('projectType').value);
-            params.append('location', document.getElementById('location').value);
-            params.append('message', document.getElementById('message').value);
+            formData.forEach(function(value, key) {
+                params.append(key, value);
+            });
             
             // Log what we are actually sending
-            console.log('firstName:', document.getElementById('firstName').value);
-            console.log('lastName:', document.getElementById('lastName').value);
-            console.log('email:', document.getElementById('email').value);
+            console.log('Form Data:', Object.fromEntries(formData));
             console.log('Full params string:', params.toString());
             
             // Send as POST with URLSearchParams body
@@ -358,5 +353,6 @@
             });
         });
     </script>
+
 </body>
 </html>
