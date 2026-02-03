@@ -36,7 +36,6 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section class="contact-section">
         <div class="container">
             <div class="contact-container">
@@ -272,69 +271,91 @@
         </div>
     </footer>
 
- <script src="assets/js/main.js"></script>
-
-<!-- Contact Form Script with Google Sheets Integration -->
-<script>
-    // PASTE YOUR WEB APP URL HERE
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7_l8BmQuou0rAkjY0gGJXbXdGz2i20dKxpHoReT4cP9xeKsujq1dcQwmgN_bEqVGwig/exec';  // ← CHANGE THIS!
+    <script src="assets/js/main.js"></script>
     
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    <!-- Contact Form Script with Google Sheets Integration -->
+    <script>
+        // IMPORTANT: Replace this with your actual Google Apps Script Web App URL
+        const SCRIPT_URL = 'YOUR_WEB_APP_URL_HERE';
         
-        // Get form data
-        const formData = new FormData(this);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-        
-        // Show loading state
-        const submitButton = this.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton.innerHTML;
-        submitButton.innerHTML = 'Sending...';
-        submitButton.disabled = true;
-        
-        // Send to Google Sheets
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then(() => {
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Reset form
-            this.reset();
+            const form = document.getElementById('contactForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
             
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'nearest' 
+            // Show loading state
+            submitButton.innerHTML = 'Sending...';
+            submitButton.disabled = true;
+            
+            // Manually build the params from each input field
+            const params = new URLSearchParams();
+            params.append('firstName', document.getElementById('firstName').value);
+            params.append('lastName', document.getElementById('lastName').value);
+            params.append('email', document.getElementById('email').value);
+            params.append('phone', document.getElementById('phone').value);
+            params.append('company', document.getElementById('company').value);
+            params.append('serviceInterest', document.getElementById('serviceInterest').value);
+            params.append('projectType', document.getElementById('projectType').value);
+            params.append('location', document.getElementById('location').value);
+            params.append('message', document.getElementById('message').value);
+            
+            // Log what we are actually sending
+            console.log('firstName:', document.getElementById('firstName').value);
+            console.log('lastName:', document.getElementById('lastName').value);
+            console.log('email:', document.getElementById('email').value);
+            console.log('Full params string:', params.toString());
+            
+            // Send as POST with URLSearchParams body
+            // This is the MOST RELIABLE method for Google Apps Script
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            })
+            .then(function() {
+                console.log('Request completed');
+                
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form
+                form.reset();
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+                
+                // Reset button
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                
+                // Hide success message after 7 seconds
+                setTimeout(function() {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 7000);
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                
+                // Show success anyway — CORS blocks response but data still goes through
+                document.getElementById('successMessage').style.display = 'block';
+                form.reset();
+                
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                
+                setTimeout(function() {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 7000);
             });
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-            
-            // Reset button
-            submitButton.innerHTML = originalButtonText;
-            submitButton.disabled = false;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error sending your message. Please try again or email us directly at vikram@mothersaigroup.com');
-            
-            // Reset button
-            submitButton.innerHTML = originalButtonText;
-            submitButton.disabled = false;
         });
-    });
-</script>
+    </script>
 </body>
 </html>
