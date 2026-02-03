@@ -70,29 +70,6 @@ if (mobileMenuBtn) {
     });
 });
 
-// Contact Form Handling (placeholder - will be connected to Google Sheets later)
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        console.log('Form Data:', data);
-        
-        // Show success message (placeholder)
-        alert('Thank you for your message! We will get back to you soon.');
-        
-        // Reset form
-        this.reset();
-        
-        // TODO: Integrate with Google Sheets API
-        // This is where the Google Apps Script integration will go
-    });
-}
-
 // Counter animation for stats
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
