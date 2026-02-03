@@ -288,7 +288,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     submitButton.disabled = true;
     
     const formData = {
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
         firstname: document.getElementById('firstName').value,
         lastname: document.getElementById('lastName').value,
         email: document.getElementById('email').value,
@@ -297,7 +297,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         service: document.getElementById('serviceInterest').value,
         project: document.getElementById('projectType').value,
         location: document.getElementById('location').value,
-        message: document.getElementById('message').value,
+        message: document.getElementById('message').value
     };
 
     console.log(formData);
