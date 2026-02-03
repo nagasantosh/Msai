@@ -312,7 +312,24 @@ document.getElementById('contactForm').addEventListener('submit', async function
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData)
-        });
+        })
+                        .then(function(response) {
+                return response.json();
+            })
+            .then(function(result) {
+                console.log('Response:', result);
+                
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form
+                form.reset();
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
 
         document.getElementById('successMessage').style.display = 'block';
         form.reset();
